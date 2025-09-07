@@ -18,10 +18,18 @@ jobs:
       with:
         node-version: '22'
         cache: 'npm'
+        cache-dependency-path: 'package-lock.json'
         
     - name: Install dependencies
-      run: npm install
-
+      run: |
+        npm ci --prefer-offline --no-audit
+        
+    - name: Verify installation
+      run: |
+        node --version
+        npm --version
+        ls -la
+        
     - name: Build application
       run: npm run build
       env:
@@ -44,10 +52,12 @@ jobs:
       with:
         node-version: '22'
         cache: 'npm'
+        cache-dependency-path: 'package-lock.json'
         
     - name: Install dependencies
-      run: npm install
-
+      run: |
+        npm ci --prefer-offline --no-audit
+        
     - name: Build application
       run: npm run build
       env:
