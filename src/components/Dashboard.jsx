@@ -16,10 +16,13 @@ const Dashboard = ({ user, onLogout }) => {
           axios.get('http://localhost:5000/api/kpis'),
           axios.get('http://localhost:5000/api/sales')
         ]);
-        setKpis(kpiResponse.data);
-        setSalesData(salesResponse.data);
+        
+        // Handle enhanced API response format
+        setKpis(kpiResponse.data.data || kpiResponse.data);
+        setSalesData(salesResponse.data.data || salesResponse.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
+        // You could add error state handling here
       } finally {
         setLoading(false);
       }
